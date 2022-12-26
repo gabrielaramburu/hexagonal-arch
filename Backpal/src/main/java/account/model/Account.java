@@ -10,7 +10,7 @@ public class Account {
 	private final Money baseLineBalance;
 	private final ActivityWindows activityWindows;
 	
-	public static Account withOutId(
+	public static Account withoutId(
 			Money baseLineBalance,
 			ActivityWindows activitiWindos) {
 		return new Account(null, baseLineBalance, activitiWindos);
@@ -22,6 +22,10 @@ public class Account {
 					Money baseLineBalance,
 					ActivityWindows activitiWindos) {
 		return new Account(id, baseLineBalance, activitiWindos);	
+	}
+	
+	public Money calculateBalance() {
+		return new Money.add(this.baseLineBalance, this.activityWindows.calculateBalance());
 	}
 	
 	@Value

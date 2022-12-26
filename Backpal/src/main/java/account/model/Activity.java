@@ -5,11 +5,10 @@ import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NonNull;
 
+@Getter
 public class Activity {
-	@Getter
+
 	private ActivityId id;
-	
-	@Getter
 	private final Account.AccountId sourceAccount;
 	private final Account.AccountId targetAccount;
 	private final Money money;

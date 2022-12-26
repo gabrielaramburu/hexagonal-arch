@@ -1,10 +1,14 @@
 package account.model;
 
 import lombok.Getter;
+import lombok.NonNull;
 
 public class Money {
 	
+	public static final Money ZERO = Money.of(0);
+	
 	@Getter
+	@NonNull
 	private final Integer amount;
 
 	private Money(Integer amount) {
@@ -15,4 +19,7 @@ public class Money {
 		return new Money(amount);
 	}
 
+	public static Money add(Money a, Money b) {
+		return new Money (a.getAmount() + b.getAmount());
+	}
 }

@@ -21,4 +21,12 @@ public class ActivityWindows {
 		activities.add(activity);
 	}
 	
+	public Money calculateBalance() {
+		return activities.stream()
+			.map(Activity::getMoney)
+			.reduce(Money.ZERO, Money::add);
+			
+		
+	}
+	
 }
