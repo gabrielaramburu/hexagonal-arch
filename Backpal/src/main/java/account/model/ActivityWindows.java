@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import account.model.Account.AccountId;
 import lombok.NonNull;
 
 public class ActivityWindows {
@@ -21,12 +22,18 @@ public class ActivityWindows {
 		activities.add(activity);
 	}
 	
-	public Money calculateBalance() {
-		return activities.stream()
+	public Money calculateBalance(AccountId accountId) {
+		Money in = activities.stream()
+			.filter(a -> a.getTargetAccount().equals(accountId))
 			.map(Activity::getMoney)
-			.reduce(Money.ZERO, Money::add);
+			.reduce(Money.ZERO, Money::add); //reduce use a BiFucntion
 			
+		Money out = activities.stream()
+				.filter(a -> a.getSourceAccount().equals(accountId))
+				.map(Activity::getMoney)
+				.reduce(Money.ZERO, Money::add);
 		
+		return Money.substract(in, out);
 	}
 	
 }

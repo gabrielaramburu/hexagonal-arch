@@ -1,5 +1,7 @@
 package account.model;
 
+import java.time.LocalDateTime;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
@@ -25,12 +27,39 @@ public class Account {
 	}
 	
 	public Money calculateBalance() {
-		return new Money.add(this.baseLineBalance, this.activityWindows.calculateBalance());
+		return Money.add(this.baseLineBalance, this.activityWindows.calculateBalance(this.id));
 	}
 	
+	public boolean withdraw(Money drawAmount, Account.AccountId targetAccount) {
+		if (!mayWithdraw(drawAmount)) return false;
+		
+		Activity withdraw = new Activity(
+				this.id,
+				this.id,
+				targetAccount, drawAmount, LocalDateTime.now());
+		this.activityWindows.addActivity(withdraw);
+		return true;
+	}
+	
+	private boolean mayWithdraw(Money drawAmount) {
+		return drawAmount.isGreaterOrEqualTo(this.calculateBalance()) ? true: false;
+	}
+
+	public boolean deposit(Money deposit, Account.AccountId sourceAccount ) {
+		Activity depositActivity = new Activity(
+				this.id,
+				sourceAccount,
+				this.id,
+				deposit,
+				LocalDateTime.now());
+		
+		this.activityWindows.addActivity(depositActivity);
+		return true;
+	}
 	@Value
 	public static class AccountId {
-		//I like the way this field is encapsulated. This allows us to change the id's type without to change the dependencies class.
+		//I like the way this field is encapsulated. 
+		//This allows us to change the id's type without to change the dependencies class.
 		Long value;
 	}
 }

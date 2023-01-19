@@ -20,6 +20,18 @@ public class Money {
 	}
 
 	public static Money add(Money a, Money b) {
-		return new Money (a.getAmount() + b.getAmount());
+		return new Money (a.getAmount() + (b.getAmount()));
+	}
+	
+	public static Money substract(Money a, Money b) {
+		return new Money (a.getAmount() - b.getAmount());
+	}
+	
+	public boolean isGreaterThan(Money money) {
+		return this.amount > money.getAmount() ? true : false;
+	}
+	
+	public boolean isGreaterOrEqualTo(Money money) {
+		return this.amount >= money.getAmount() ? true: false;
 	}
 }
