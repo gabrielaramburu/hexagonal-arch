@@ -1,8 +1,11 @@
 package account.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-
+import lombok.ToString;
+@ToString
+@EqualsAndHashCode
 public class Money {
 	
 	public static final Money ZERO = Money.of(0);

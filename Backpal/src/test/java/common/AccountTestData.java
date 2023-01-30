@@ -8,19 +8,14 @@ import account.model.ActivityWindows;
 import account.model.Money;
 
 public class AccountTestData {
-	public static Account buildDefaultAccount() {
+	public static AccountBuilder defaultAccount() {
 		
 		return new AccountBuilder()
 				.withAccountId(new AccountId(42L))
 				.withBaseLine(Money.of(999))
 				.withActivityWindow(new ActivityWindows(
-						defaultActivity()
-							.withMoney(Money.of(999))
-							.withTargetAccount(new AccountId(1L)).build(),
-						defaultActivity()
-							.withMoney(Money.of(1))
-							.withTargetAccount(new AccountId(1L)).build()))
-				.build();
+						defaultActivity().build(),
+						defaultActivity().build()));
 	}
 	
 	public static class AccountBuilder {

@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import account.model.Account.AccountId;
+import lombok.Getter;
 import lombok.NonNull;
 
 public class ActivityWindows {
+	@Getter
 	private List<Activity> activities;
 
 	public ActivityWindows(@NonNull List<Activity> activities) {

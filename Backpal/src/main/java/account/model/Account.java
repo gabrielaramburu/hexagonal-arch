@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Value;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account {
 	private final AccountId id;
 	private final Money baseLineBalance;
+	@Getter
 	private final ActivityWindows activityWindows;
 	
 	public static Account withoutId(
@@ -42,7 +44,7 @@ public class Account {
 	}
 	
 	private boolean mayWithdraw(Money drawAmount) {
-		return drawAmount.isGreaterOrEqualTo(this.calculateBalance()) ? true: false;
+		return this.calculateBalance().isGreaterOrEqualTo(drawAmount) ? true: false;
 	}
 
 	public boolean deposit(Money deposit, Account.AccountId sourceAccount ) {
