@@ -1,7 +1,9 @@
 package account.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import account.model.Account.AccountId;
@@ -22,6 +24,24 @@ public class ActivityWindows {
 	
 	public void addActivity(Activity activity) {
 		activities.add(activity);
+	}
+	
+	/**
+	 * @return The timestamp of the first activity of this window.
+	 */
+	public LocalDateTime getStartTimestamp() {
+		return this.activities.stream()
+				.min(Comparator.comparing(Activity::getTimestamp))
+				.orElseThrow(IllegalStateException::new)
+				.getTimestamp();
+				
+	}
+	
+	public LocalDateTime getEndTimestamp() {
+		return this.activities.stream()
+				.max(Comparator.comparing(Activity::getTimestamp))
+				.orElseThrow(IllegalStateException::new)
+				.getTimestamp();
 	}
 	
 	public Money calculateBalance(AccountId accountId) {

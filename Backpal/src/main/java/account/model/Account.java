@@ -38,7 +38,8 @@ public class Account {
 		Activity withdraw = new Activity(
 				this.id,
 				this.id,
-				targetAccount, drawAmount, LocalDateTime.now());
+				targetAccount, 
+				drawAmount, LocalDateTime.now());
 		this.activityWindows.addActivity(withdraw);
 		return true;
 	}

@@ -8,8 +8,8 @@ import account.model.ActivityWindows;
 import account.model.Money;
 
 public class AccountTestData {
+	
 	public static AccountBuilder defaultAccount() {
-		
 		return new AccountBuilder()
 				.withAccountId(new AccountId(42L))
 				.withBaseLine(Money.of(999))
