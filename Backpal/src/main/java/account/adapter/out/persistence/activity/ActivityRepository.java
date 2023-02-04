@@ -15,4 +15,21 @@ public interface ActivityRepository extends JpaRepository<ActivityJpaEntity, Lon
 	List<ActivityJpaEntity> findByOwnerSince(
 			@Param("ownerAccountId") Long ownerAccountId,
 			@Param("since") LocalDateTime since);
+	
+	@Query("select sum(a.amount) from ActivityJpaEntity a " +
+			"where a.targetAccountId = :accountId " +
+			"and a.ownerAccountId = :accountId " +
+			"and a.timestamp < :until")
+	Integer getDepositBalanceUntil(
+			@Param("accountId") Long accountId,
+			@Param("until") LocalDateTime until);
+
+	@Query("select sum(a.amount) from ActivityJpaEntity a " +
+			"where a.sourceAccountId = :accountId " +
+			"and a.ownerAccountId = :accountId " +
+			"and a.timestamp < :until")
+	Integer getWithdrawalBalanceUntil(
+			@Param("accountId") Long accountId,
+			@Param("until") LocalDateTime until);
+
 }

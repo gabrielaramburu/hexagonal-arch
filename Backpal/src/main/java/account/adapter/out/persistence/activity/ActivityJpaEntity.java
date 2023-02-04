@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="activity")
-@Data
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ActivityJpaEntity {
@@ -27,7 +27,7 @@ public class ActivityJpaEntity {
 
 	private Long targetAccount;
 
-	private Long money;
+	private Integer money;
 
 	private LocalDateTime timestamp;
 }

@@ -16,6 +16,7 @@ public class AccountPersistenteAdapter implements LoadAccountPort{
 
 	private final AccountRepository accountRepository;
 	private final ActivityRepository activityRepository;
+	private final AccountMapper accountMapper;
 	
 	@Override
 	public Account loadAccount(AccountId accountId, LocalDateTime baseLineDate) {
@@ -26,7 +27,25 @@ public class AccountPersistenteAdapter implements LoadAccountPort{
 		List<ActivityJpaEntity> activities =
 		activityRepository.findByOwnerSince(accountId.getValue(), baseLineDate);
 		
-		return null;
+		Integer withDrawalBalance = orZero(
+				activityRepository.getWithdrawalBalanceUntil(
+						accountId.getValue()
+						, baseLineDate));
+		
+
+		Integer withDepositBalance = orZero(
+				activityRepository.getDepositBalanceUntil(
+						accountId.getValue()
+						, baseLineDate));
+		
+		return accountMapper.mapToDamainEntity(
+				account, 
+				activities, 
+				withDrawalBalance, 
+				withDepositBalance);
 	}
 
+	private Integer orZero(Integer value) {
+		return value == null ? 0 : value;
+	}
 }
