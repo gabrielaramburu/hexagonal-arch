@@ -41,10 +41,10 @@ class AccountMapper {
 		for (ActivityJpaEntity activity: activities) {
 			mappedActivities.add(new Activity(
 					new Activity.ActivityId(activity.getId()),
-					new Account.AccountId(activity.getOwnerAccount()),
-					new Account.AccountId(activity.getSourceAccount()),
-					new Account.AccountId(activity.getTargetAccount()),
-					Money.of(activity.getMoney()),
+					new Account.AccountId(activity.getOwnerAccountId()),
+					new Account.AccountId(activity.getSourceAccountId()),
+					new Account.AccountId(activity.getTargetAccountId()),
+					Money.of(activity.getAmount()),
 					activity.getTimestamp()));
 		}
 		

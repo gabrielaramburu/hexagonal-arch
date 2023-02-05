@@ -21,13 +21,13 @@ public class ActivityJpaEntity {
 	@GeneratedValue
 	private Long id;
 
-	private Long ownerAccount;
+	private Long ownerAccountId;
 
-	private Long sourceAccount;
+	private Long sourceAccountId;
 
-	private Long targetAccount;
+	private Long targetAccountId;
 
-	private Integer money;
+	private Integer amount;
 
 	private LocalDateTime timestamp;
 }
