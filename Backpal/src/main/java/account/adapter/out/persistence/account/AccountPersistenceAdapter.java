@@ -12,7 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class AccountPersistenteAdapter implements LoadAccountPort{
+public class AccountPersistenceAdapter implements LoadAccountPort{
 
 	private final AccountRepository accountRepository;
 	private final ActivityRepository activityRepository;
